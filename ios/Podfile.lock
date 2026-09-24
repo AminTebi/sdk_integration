@@ -1,0 +1,35 @@
+PODS:
+  - Flutter (1.0.0)
+  - permission_handler_apple (9.4.8):
+    - Flutter
+  - shenai_sdk (3.1.14):
+    - Flutter
+    - ShenaiSDK (= 3.1.14)
+  - ShenaiSDK (3.1.14)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - shenai_sdk (from `.symlinks/plugins/shenai_sdk/ios`)
+
+SPEC REPOS:
+  trunk:
+    - ShenaiSDK
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  shenai_sdk:
+    :path: ".symlinks/plugins/shenai_sdk/ios"
+
+SPEC CHECKSUMS:
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  permission_handler_apple: 92d754bbaa7361d436db2d6c3c1c2a0fdcec462e
+  shenai_sdk: d769a79876c6e0e37ed89ba375c0adbbf4c9b093
+  ShenaiSDK: 33239ea88fd291388ff28537081f557335c36e9f
+
+PODFILE CHECKSUM: 24b18771e680c2e232faf5917b52894307bc1c74
+
+COCOAPODS: 1.16.2
