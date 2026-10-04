@@ -6,6 +6,8 @@ import 'package:shenai_skd_integration/demo/mock_health_data.dart';
 import 'package:shenai_skd_integration/models/health_index_coverage.dart';
 import 'package:shenai_skd_integration/models/risk_profile.dart';
 import 'package:shenai_skd_integration/pages/risk_form_page.dart';
+import 'package:shenai_skd_integration/risk_assessor/coach.dart';
+import 'package:shenai_skd_integration/risk_assessor/risk_engine.dart';
 import 'package:shenai_skd_integration/theme/app_colors.dart';
 import 'package:shenai_skd_integration/widgets/app_page_header.dart';
 import 'package:shenai_skd_integration/widgets/atmosphere_background.dart';
@@ -13,6 +15,7 @@ import 'package:shenai_skd_integration/widgets/glass_card.dart';
 import 'package:shenai_skd_integration/widgets/health_report_section.dart';
 import 'package:shenai_skd_integration/widgets/luxury_button.dart';
 import 'package:shenai_skd_integration/widgets/metric_tile.dart';
+import 'package:shenai_skd_integration/widgets/risk_assessment_section.dart';
 
 class ResultsPage extends StatefulWidget {
   const ResultsPage({
@@ -39,6 +42,9 @@ class _ResultsPageState extends State<ResultsPage> {
       RiskProfile.defaults(results: widget.results);
   HealthRisks? _risks;
   List<HealthIndexDisplay> _healthRows = const [];
+  HealthDataInput? _riskAssessmentInput;
+  EngineResult? _riskAssessment;
+  CoachingPlanData? _coachingPlan;
   bool _isComputing = false;
   String? _error;
 
@@ -54,6 +60,23 @@ class _ResultsPageState extends State<ResultsPage> {
         risks: seeded,
       );
     }
+    if (widget.initialProfile != null) {
+      final assessment = _buildRiskAssessment(_profile);
+      _riskAssessmentInput = assessment.input;
+      _riskAssessment = assessment.result;
+      _coachingPlan = assessment.plan;
+    }
+  }
+
+  ({
+    HealthDataInput input,
+    EngineResult result,
+    CoachingPlanData plan,
+  }) _buildRiskAssessment(RiskProfile profile) {
+    final input = profile.toRiskAssessmentInput(results: widget.results);
+    final result = RiskEngine.computeComprehensiveHealthRisk(input);
+    final plan = RiskCoach.buildPlan(input, result);
+    return (input: input, result: result, plan: plan);
   }
 
   Future<void> _openRiskFormAndCompute() async {
@@ -76,8 +99,13 @@ class _ResultsPageState extends State<ResultsPage> {
       return;
     }
 
+    final assessment = _buildRiskAssessment(profile);
+
     setState(() {
       _profile = profile;
+      _riskAssessmentInput = assessment.input;
+      _riskAssessment = assessment.result;
+      _coachingPlan = assessment.plan;
       _isComputing = true;
       _error = null;
     });
@@ -135,6 +163,9 @@ class _ResultsPageState extends State<ResultsPage> {
     final results = widget.results;
     final textTheme = Theme.of(context).textTheme;
     final risks = _risks;
+    final riskAssessmentInput = _riskAssessmentInput;
+    final riskAssessment = _riskAssessment;
+    final coachingPlan = _coachingPlan;
     final skippedRows =
         _healthRows.where((row) => !row.isComputed).toList(growable: false);
 
@@ -319,6 +350,16 @@ class _ResultsPageState extends State<ResultsPage> {
                         ],
                       ),
                     ),
+                    if (riskAssessmentInput != null &&
+                        riskAssessment != null &&
+                        coachingPlan != null) ...[
+                      const SizedBox(height: 28),
+                      RiskAssessmentSection(
+                        input: riskAssessmentInput,
+                        result: riskAssessment,
+                        plan: coachingPlan,
+                      ),
+                    ],
                     if (risks != null) ...[
                       const SizedBox(height: 28),
                       HealthReportSection(

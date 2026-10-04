@@ -273,7 +273,37 @@ abstract final class AppStrings {
   static const countryIso = 'کشور (کد ISO، مثل IR)';
   static const countryValidation = 'کد دو حرفی کشور را وارد کنید';
   static const vegetableFruitDiet = 'رژیم میوه و سبزیجات';
-  static const computeHealthIndices = 'محاسبه شاخص‌های سلامت';
+  static const computeHealthIndices = 'محاسبه شاخص‌ها و ریسک';
+
+  // ShenRisk insurance assessment
+  static const insuranceRiskAssessment = 'ارزیابی ریسک بیمه‌ای';
+  static const insuranceRiskAssessmentDesc =
+      'محاسبه‌شده با موتور ShenRisk پس از تکمیل پروفایل سلامت و ترکیب داده‌های اسکن چهره.';
+  static const compositeInsuranceScore = 'نمره ریسک بیمه‌ای';
+  static const underwritingDecision = 'تصمیم بیمه‌گری';
+  static const premiumLoading = 'تعدیل حق‌بیمه';
+  static const cardiovascularRisk10y = 'ریسک قلبی‌عروقی ۱۰ ساله';
+  static const diabetesMetabolicRisk = 'ریسک دیابت و متابولیک';
+  static const centralAdiposityOsa = 'چاقی مرکزی و آپنه خواب';
+  static const autonomicLoad = 'تعادل اتونوم و بار فیزیولوژیک';
+  static const tyGIndex = 'شاخص TyG';
+  static const findriscScore = 'امتیاز FINDRISC';
+  static const biologicalAgeEstimated = 'سن بیولوژیک تخمینی';
+  static const criticalWarnings = 'هشدارهای حیاتی';
+  static const riskReductionPlan = 'نقشه راه کاهش ریسک';
+  static const currentScore = 'نمره فعلی';
+  static const targetScore = 'نمره هدف';
+  static const effectiveActions = 'اقدام‌های اثرگذار';
+  static const deferredActions = 'اقدام‌های بنیادی با اثر تأخیری';
+  static const maintainRiskTitle = 'وضعیت مطلوب — تمرکز روی حفظ سلامت';
+  static const immutableFactors = 'فاکتورهای خط پایه';
+  static const scoreDelta = 'کاهش امتیاز';
+  static const basePremiumAnnual = 'حق‌بیمه پایه سالانه';
+  static const currentPremium = 'حق‌بیمه فعلی';
+  static const targetPremium = 'حق‌بیمه هدف';
+  static const annualSavings = 'صرفه‌جویی سالانه';
+  static const rial = 'ریال';
+  static const mustBePositive = 'باید بزرگ‌تر از صفر باشد';
   static const required = 'الزامی';
   static const invalid = 'نامعتبر';
 }

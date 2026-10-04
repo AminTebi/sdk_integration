@@ -527,11 +527,21 @@ class _NumberField extends StatelessWidget {
           return required ? AppStrings.required : null;
         }
         if (integer) {
-          if (int.tryParse(text) == null) {
+          final parsed = int.tryParse(text);
+          if (parsed == null) {
             return AppStrings.invalid;
           }
-        } else if (double.tryParse(text) == null) {
-          return AppStrings.invalid;
+          if (parsed <= 0) {
+            return AppStrings.mustBePositive;
+          }
+        } else {
+          final parsed = double.tryParse(text);
+          if (parsed == null) {
+            return AppStrings.invalid;
+          }
+          if (parsed <= 0) {
+            return AppStrings.mustBePositive;
+          }
         }
         return null;
       },
